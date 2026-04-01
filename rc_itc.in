@@ -1,0 +1,59 @@
+# ======================================
+# ITC 批处理配置
+# 运行方法：python deal_ITC_batch_rc.py rc_itc.in
+##Author：cheng hao
+##Email: chenghao8425@163.com
+##微信公众号：材料计算学习笔记
+# ======================================
+
+# 根目录：下面放多个 case 子文件夹
+root_dir =C:/Users/chenghao/OneDrive/Desktop/21
+
+# list: 只处理 case_dirs 中列出的文件夹
+# auto: 自动处理 root_dir 下全部子文件夹
+scan_mode = auto
+
+# 当 scan_mode = list 时生效
+case_dirs = case01, case02, case03
+
+# 总汇总表文件名
+batch_summary_name = batch_itc_results_summary.csv
+
+[defaults]
+# 输入文件名
+temp_input_name = temp.CBNT.txt
+heat_flux_input_name = heat_flux_exchange.txt
+
+# 输出文件名
+extracted_temp_name = extracted_temperature_data.txt
+mean_temp_name = mean_temperature_data.txt
+mean_temp_figure_name = mean_temperature_vs_position.png
+heat_flux_figure_name = energy_flux_fit.png
+temp_fit_figure_name = temperature_fit.png
+summary_name = result_summary.csv
+log_name = ITC_results_log.txt
+
+# 计算参数
+num_blocks = 3
+num_chunks = 50
+position_factor = 197.39605679
+
+# 热流文件第一列时间步转 ps 的因子
+# 如果 time_ps = timestep * 0.0005，就写 0.0005
+time_ps_factor = 0.0005
+
+# 两侧线性拟合区间，以及界面位置（单位：Å）
+fit_range1 = 35, 92
+fit_range2 = 112, 166
+mid_x = 99
+
+# 界面面积，二选一即可。常用的是 area_A2（单位 Å^2）
+area_A2 = 261.6881
+# area_m2 = 2.616881e-18
+
+# 某个 case 单独覆盖参数时，写成下面这种形式
+[case:case03]
+fit_range1 = 36, 90
+fit_range2 = 114, 168
+mid_x = 100
+area_A2 = 270.0
